@@ -1,0 +1,13 @@
+Action 1: Placing a Random Fort 
+    Responsibility: The FORT class is in charge of placing itself given all information from GRID.
+    Pre-condition: Depending on the size of FORT, must set some sort of default FORT shape. The dimensions of the GRID and the UNITs that fill it must already be created.
+    Process: Firstly, check if there is some location in the Grid where the default fort shape can be placed. If no such location exists, throw an error saying that there is no space for the new FORT (error handled separately). Then, using Java's Random, add some UNIT that is not yet Hit or a part of a FORT. Repeatedly, add a random UNIT this is touching the last UNIT added to the FORT but not yet Hit or a part of a FORT until the entire FORT has been populated. Here, it must be ensured that the touching UNITs are in accordance with the dimensions of the 10x10 GRID. If prior to the FORT being fully populated there remains no free UNITs around the last added UNIT, use the second to last added UNIT. If prior to the FORT being full, there remains no free UNITs around any of the UNITs in the fort, revert to building the default fort.
+    Post-condition: Always in either a fully formed FORT or a Runtime Error Thrown.
+
+
+Action 2: User Move Input
+    Responsibility: The USER INTERFACE class is in charge of eliciting a valid coordinate from the user by using a SCANNER and sending it to GRID.
+    Pre-condition. The dimensions of the GRID and the UNITs that fill it must already be created. Additionally, the class owns a SCANNER object to interact with the user.
+    Process: Prompt the user to input a valid coordinate according to the displayed table in the form <Letter><Number>. Then, using the SCANNER, collect the input from the System as a STRING object. Clean the STRING for any trailing or leading white space. Then, take the first char in the STRING and cast it to its integer value by ASCII. If this ASCII value does not correspond to an alphabet value (lowercase or uppercase) that is an in-bound row, restart and prompt the user for a valid coordinate else save row. Then, take the second char in the STRING and cast it to its integer value by ASCII. If this ASCII value does not correspond to a number value that is an in-bound column, restart and prompt the user for a valid coordinate else save column. Additionally, must handle the row 10 case separately by comparing the end of STRING to "10". If a valid, in-bound row and column have been found, send them as user move to GRID else the process loops until a valid coordinate is inputted. Also, note that since casting char to integer using ASCII, there will never be an Integer parsing error to handle.
+    Post-condition: GRID receives a valid coordinate to hit.
+
